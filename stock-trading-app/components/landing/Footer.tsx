@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Github, X, Link, Mail } from 'lucide-react';
+import { Star, Heart, Share, Mail } from 'lucide-react';
 
 const footerLinks = {
   product: [
@@ -49,13 +49,13 @@ export function Footer() {
               </p>
               <div className="flex space-x-4">
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  <X className="h-5 w-5" />
+                  <Star className="h-5 w-5" />
                 </a>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  <Link className="h-5 w-5" />
+                  <Heart className="h-5 w-5" />
                 </a>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  <Github className="h-5 w-5" />
+                  <Share className="h-5 w-5" />
                 </a>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
                   <Mail className="h-5 w-5" />
