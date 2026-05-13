@@ -4,32 +4,33 @@ import { motion } from 'framer-motion';
 import { TrendingUp, TrendingDown, DollarSign, PieChart } from 'lucide-react';
 import { useStore } from '@/stores/useStore';
 import { formatCurrency, formatPercentage, getChangeColor } from '@/utils/formatters';
+import { Portfolio } from '@/types';
 
 const cards = [
   {
     title: 'Total Balance',
-    key: 'totalBalance' as keyof typeof portfolio,
+    key: 'totalBalance' as keyof Portfolio,
     icon: DollarSign,
     color: 'text-emerald-400',
     bgColor: 'bg-emerald-500/10'
   },
   {
     title: 'Daily P&L',
-    key: 'dailyPnL' as keyof typeof portfolio,
+    key: 'dailyPnL' as keyof Portfolio,
     icon: TrendingUp,
     color: 'text-blue-400',
     bgColor: 'bg-blue-500/10'
   },
   {
     title: 'Invested Amount',
-    key: 'investedAmount' as keyof typeof portfolio,
+    key: 'investedAmount' as keyof Portfolio,
     icon: PieChart,
     color: 'text-purple-400',
     bgColor: 'bg-purple-500/10'
   },
   {
     title: 'Returns %',
-    key: 'returnsPercent' as keyof typeof portfolio,
+    key: 'returnsPercent' as keyof Portfolio,
     icon: TrendingUp,
     color: 'text-orange-400',
     bgColor: 'bg-orange-500/10',
@@ -60,7 +61,7 @@ export function PortfolioCards() {
               </div>
               {card.key === 'dailyPnL' && (
                 <div className={`flex items-center ${getChangeColor(value as number)}`}>
-                  {value >= 0 ? (
+                  {(value as number) >= 0 ? (
                     <TrendingUp className="h-4 w-4" />
                   ) : (
                     <TrendingDown className="h-4 w-4" />
@@ -79,7 +80,7 @@ export function PortfolioCards() {
               </p>
               {card.key === 'returnsPercent' && (
                 <p className={`text-sm ${getChangeColor(value as number)}`}>
-                  {value >= 0 ? '+' : ''}{formatCurrency(portfolio.returns)}
+                  {(value as number) >= 0 ? '+' : ''}{formatCurrency(portfolio.returns)}
                 </p>
               )}
             </div>
