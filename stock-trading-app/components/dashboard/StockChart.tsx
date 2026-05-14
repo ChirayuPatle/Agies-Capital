@@ -1,9 +1,31 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useStore } from '@/stores/useStore';
+import { formatCurrency, formatPercentage, getChangeColor } from '@/utils/formatters';
 import { mockChartData } from '@/data/mockData';
 
 export function StockChart() {
+  const { selectedStock, stocks } = useStore();
+
+  // Use selected stock or first stock as default
+  const stock = selectedStock || stocks[0];
+
+  if (!stock) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="glass rounded-xl p-6 mb-8"
+      >
+        <div className="text-center py-8">
+          <p className="text-gray-400">Loading stock data...</p>
+        </div>
+      </motion.div>
+    );
+  }
+
   // Simple SVG chart for now
   const data = mockChartData;
   const maxPrice = Math.max(...data.map(d => d.high));
@@ -24,10 +46,12 @@ export function StockChart() {
       className="glass rounded-xl p-6 mb-8"
     >
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-xl font-semibold text-white">AAPL - Apple Inc.</h3>
+        <h3 className="text-xl font-semibold text-white">{stock.symbol} - {stock.name}</h3>
         <div className="text-right">
-          <div className="text-2xl font-bold text-white">$175.43</div>
-          <div className="text-sm text-green-400">+2.15 (+1.24%)</div>
+          <div className="text-2xl font-bold text-white">{formatCurrency(stock.price)}</div>
+          <div className={`text-sm ${getChangeColor(stock.change)}`}>
+            {stock.change >= 0 ? '+' : ''}{stock.change.toFixed(2)} ({formatPercentage(stock.changePercent)})
+          </div>
         </div>
       </div>
 

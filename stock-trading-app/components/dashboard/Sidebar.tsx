@@ -10,7 +10,8 @@ import {
   User,
   LogOut,
   Menu,
-  X
+  X,
+  Receipt
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useStore } from '@/stores/useStore';
@@ -20,6 +21,7 @@ import { usePathname } from 'next/navigation';
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
   { name: 'Trading', href: '/trading', icon: TrendingUp },
+  { name: 'Transactions', href: '/transactions', icon: Receipt },
   { name: 'Analytics', href: '/analytics', icon: BarChart3 },
   { name: 'AI Chat', href: '/chat', icon: MessageSquare },
   { name: 'Profile', href: '/profile', icon: User },
@@ -107,6 +109,10 @@ export function Sidebar() {
             <Button
               variant="ghost"
               className="w-full justify-start text-gray-300 hover:text-white hover:bg-slate-800"
+              onClick={() => {
+                useStore.getState().logout();
+                window.location.href = '/';
+              }}
             >
               <LogOut className="h-5 w-5 mr-3" />
               Logout

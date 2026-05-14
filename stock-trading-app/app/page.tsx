@@ -1,3 +1,8 @@
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useStore } from '@/stores/useStore';
 import { HeroSection } from '@/components/landing/HeroSection';
 import { FeaturesSection } from '@/components/landing/FeaturesSection';
 import { TestimonialsSection } from '@/components/landing/TestimonialsSection';
@@ -5,6 +10,15 @@ import { PricingSection } from '@/components/landing/PricingSection';
 import { Footer } from '@/components/landing/Footer';
 
 export default function Home() {
+  const { isAuthenticated } = useStore();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push('/dashboard');
+    }
+  }, [isAuthenticated, router]);
+
   return (
     <div className="min-h-screen">
       <HeroSection />

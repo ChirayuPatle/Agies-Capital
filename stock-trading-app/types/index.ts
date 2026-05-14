@@ -101,3 +101,22 @@ export interface Order {
   status: 'PENDING' | 'EXECUTED' | 'CANCELLED';
   timestamp: Date;
 }
+
+export interface Notification {
+  id: string;
+  type: 'PRICE_ALERT' | 'ORDER_EXECUTED' | 'ORDER_CANCELLED' | 'MARKET_NEWS' | 'SYSTEM';
+  title: string;
+  message: string;
+  timestamp: Date;
+  read: boolean;
+  data?: any;
+}
+
+export interface PriceAlert {
+  id: string;
+  symbol: string;
+  condition: 'ABOVE' | 'BELOW';
+  targetPrice: number;
+  isActive: boolean;
+  createdAt: Date;
+}

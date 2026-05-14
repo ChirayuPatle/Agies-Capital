@@ -72,13 +72,17 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
         >
-          <Button size="lg" className="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-4 text-lg">
-            Start Trading
-            <ArrowRight className="ml-2 h-5 w-5" />
+          <Button size="lg" className="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-4 text-lg" asChild>
+            <a href="/auth/signup">
+              Start Trading
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </a>
           </Button>
-          <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black px-8 py-4 text-lg">
-            View Markets
-            <TrendingUp className="ml-2 h-5 w-5" />
+          <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black px-8 py-4 text-lg" asChild>
+            <a href="/auth/login">
+              Sign In
+              <TrendingUp className="ml-2 h-5 w-5" />
+            </a>
           </Button>
         </motion.div>
 
